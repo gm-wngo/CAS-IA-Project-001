@@ -4,7 +4,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG levkiwi_lakehouse;
+USE CATALOG ngow_lakehouse;
 USE SCHEMA bronze;
 
 -- COMMAND ----------

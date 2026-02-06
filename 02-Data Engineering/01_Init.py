@@ -7,9 +7,9 @@
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC DROP DATABASE IF EXISTS levkiwi_lakehouse.bronze CASCADE;
-# MAGIC DROP DATABASE IF EXISTS levkiwi_lakehouse.silver CASCADE; 
-# MAGIC DROP DATABASE IF EXISTS levkiwi_lakehouse.gold CASCADE;
+# MAGIC DROP DATABASE IF EXISTS ngow_lakehouse.bronze CASCADE;
+# MAGIC DROP DATABASE IF EXISTS ngow_lakehouse.silver CASCADE; 
+# MAGIC DROP DATABASE IF EXISTS ngow_lakehouse.gold CASCADE;
 
 # COMMAND ----------
 
@@ -19,11 +19,11 @@
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC USE CATALOG levkiwi_lakehouse;
+# MAGIC USE CATALOG ngow_lakehouse;
 # MAGIC
-# MAGIC CREATE DATABASE IF NOT EXISTS levkiwi_lakehouse.bronze;
-# MAGIC CREATE DATABASE IF NOT EXISTS levkiwi_lakehouse.silver;
-# MAGIC CREATE DATABASE IF NOT EXISTS levkiwi_lakehouse.gold;
+# MAGIC CREATE DATABASE IF NOT EXISTS ngow_lakehouse.bronze;
+# MAGIC CREATE DATABASE IF NOT EXISTS ngow_lakehouse.silver;
+# MAGIC CREATE DATABASE IF NOT EXISTS ngow_lakehouse.gold;
 # MAGIC
 
 # COMMAND ----------
@@ -86,6 +86,61 @@
 # MAGIC     _tf_create_date TIMESTAMP,
 # MAGIC     _tf_update_date TIMESTAMP
 # MAGIC )
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE silver.product (
+# MAGIC     _tf_id BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL, -- Incremental surrogate key
+# MAGIC
+# MAGIC     -- Source table columns (bronze.product)
+# MAGIC     product_id INT,
+# MAGIC     name STRING,
+# MAGIC     product_number STRING,
+# MAGIC     color STRING,
+# MAGIC     standard_cost DECIMAL(19,4),
+# MAGIC     list_price DECIMAL(19,4),
+# MAGIC     size STRING,
+# MAGIC     weight DECIMAL(8,2),
+# MAGIC     product_category_id INT,
+# MAGIC     product_model_id INT,
+# MAGIC     sell_start_date TIMESTAMP,
+# MAGIC     sell_end_date TIMESTAMP,
+# MAGIC     discontinued_date TIMESTAMP,
+# MAGIC     thumbnail_photo BINARY,
+# MAGIC     thumbnail_photo_filename STRING,
+# MAGIC     rowguid CHAR(36),
+# MAGIC     modified_date TIMESTAMP,
+# MAGIC
+# MAGIC     -- Technical columns
+# MAGIC     _tf_valid_from TIMESTAMP, -- Start of record validity
+# MAGIC     _tf_valid_to TIMESTAMP,   -- End of record validity (NULL indicates current record)
+# MAGIC     _tf_create_date TIMESTAMP,
+# MAGIC     _tf_update_date TIMESTAMP
+# MAGIC );
+# MAGIC
+
+# COMMAND ----------
+
+# MAGIC
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE silver.productcategory (
+# MAGIC     _tf_id BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,  -- surrogate key
+# MAGIC
+# MAGIC     -- Source columns
+# MAGIC     product_category_id INT,
+# MAGIC     parent_product_category_id INT,
+# MAGIC     name STRING,
+# MAGIC     rowguid CHAR(36),
+# MAGIC     modified_date TIMESTAMP,
+# MAGIC
+# MAGIC     -- Technical SCD2 columns
+# MAGIC     _tf_valid_from TIMESTAMP,
+# MAGIC     _tf_valid_to TIMESTAMP,
+# MAGIC     _tf_create_date TIMESTAMP,
+# MAGIC     _tf_update_date TIMESTAMP
+# MAGIC );
+# MAGIC
 
 # COMMAND ----------
 

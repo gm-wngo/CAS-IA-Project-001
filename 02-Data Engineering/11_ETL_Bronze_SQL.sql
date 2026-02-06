@@ -6,7 +6,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG levkiwi_lakehouse;
+USE CATALOG ngow_lakehouse;
 USE DATABASE bronze;
 
 -- COMMAND ----------

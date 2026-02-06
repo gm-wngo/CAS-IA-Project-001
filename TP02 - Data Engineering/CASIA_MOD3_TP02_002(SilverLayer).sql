@@ -244,7 +244,20 @@ WHEN NOT MATCHED THEN
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC Incremental load of product
+-- MAGIC ## Incremental load of customeradress
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Incremental load of product
 
 -- COMMAND ----------
 
@@ -434,7 +447,7 @@ WHEN NOT MATCHED THEN
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC Incremental load of productcategory
+-- MAGIC ## Incremental load of productcategory
 
 -- COMMAND ----------
 
@@ -535,6 +548,45 @@ WHEN NOT MATCHED THEN
       ${load_date},   -- _tf_create_date
       ${load_date}    -- _tf_update_date
   );
+
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Incremental load of productdescription
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Incremental load of productmodel
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Incremental load of productmodelproductdescription
+
+-- COMMAND ----------
+
+
+
+-- COMMAND ----------
+
 
 
 -- COMMAND ----------
@@ -799,8 +851,3 @@ WHEN NOT MATCHED THEN
     load_date,        -- _tf_create_date
     load_date         -- _tf_update_date
   )
-
--- COMMAND ----------
-
--- MAGIC %md
--- MAGIC **INCREMENTAL LOAD OF PRODUCT**
